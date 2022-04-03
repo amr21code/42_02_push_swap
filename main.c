@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:04:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/02 20:27:03 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:02:50 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ void	ps_init_arrays(int **list, int **length, int **sequence, t_list *a)
 
 	i = 0;
 	len = ft_lstsize(a);
-	*list = (int *)malloc(sizeof(int *) * len);
-	*length = (int *)malloc(sizeof(int *) * len);
-	*sequence = (int *)malloc(sizeof(int *) * len);
+	*list = malloc(sizeof(int) * len);
+	*length = malloc(sizeof(int) * len);
+	*sequence = malloc(sizeof(int) * len);
 	while (a)
 	{
-		*list[i] = *((int *)a->content);
-		*length[i] = 1;
-		*sequence[i] = 0;
+		(*list)[i] = *((int *)a->content);
+		(*length)[i] = 1;
+		(*sequence)[i] = 0;
 		a = a->next;
+		i++;
 	}
 }
 
@@ -46,7 +47,7 @@ void	ps_init_arrays(int **list, int **length, int **sequence, t_list *a)
 // 	return (max);
 // }
 
-int	*ps_get_sequence(int *list, int *sequence, int len)
+int	*ps_get_sequence(int *list, int *sequence, int *length, int len)
 {
 	int	i;
 	int	max;
@@ -58,20 +59,20 @@ int	*ps_get_sequence(int *list, int *sequence, int len)
 	max = INT_MIN;
 	while (i < len)
 	{
-		if (sequence[i] > max)
+		ft_printf("i %d max %d length %d seq %d\n", i, max, length[i], idx_max);
+		if (length[i] > max)
 		{
-			max = sequence[i];
+			max = length[i];
 			idx_max = i;
 		}
 		i++;
 	}
-	res = (int *)malloc(sizeof(int) * i);
-	i = max - 1;
-	res[i] = list[idx_max];
-	while (--i)
+	res = (int *)malloc(sizeof(int) * idx_max);
+	while (--max >= 0)
 	{
-		res[i] = list[sequence[idx_max]];
+		res[max] = list[idx_max];
 		idx_max = sequence[idx_max];
+		ft_printf("seq %d res %d\n", idx_max, res[max]);
 	}
 	return (res);
 }
@@ -85,22 +86,44 @@ int	*ps_find_lis(t_list *a, int len)
 	int	*sequence;
 
 	i = 1;
-	j = 0;
 	ps_init_arrays(&list, &length, &sequence, a);
 	while (i < len)
 	{
+		j = 0;
 		while (j < i)
 		{
-			if (list[i] > list[j])
+			if (list[j] < list[i])
 			{
-				(length[i])++;
-				sequence[i] = i;
+				if ((length[j] + 1) >= length[i])
+				{
+					length[i] = length[j] + 1;
+					sequence[i] = j;
+				}
 			}
+			ft_printf("list[%d] = %d  *** list[%d] = %d\n", i, list[i], j, list[j]);
+			ft_printf("length[%d] = %d\n", i, length[i]);
+			ft_printf("sequence[%d] = %d\n\n", i, sequence[i]);
 			j++;
 		}
+		ft_printf("***********************************************\n");
 		i++;
 	}
-	return (ps_get_sequence(list, sequence, len));
+	i = 0;
+	ft_printf("\n len");
+	while (i < 12)
+	{
+		ft_printf(" %d", length[i]);
+		i++;
+	}
+	i = 0;
+	ft_printf("\n seq");
+	while (i < 12)
+	{
+		ft_printf(" %d", sequence[i]);
+		i++;
+	}
+	ft_printf("\n");
+	return (ps_get_sequence(list, sequence, length, len));
 }
 
 t_list	*ps_duplicate_lst(t_list *lst)
@@ -171,11 +194,12 @@ int	main(int ac, char **av)
 		while (lowest++)
 			ps_rotate_reverse(&a, 'a');
 	}
+	free(temp);
 	temp = ps_duplicate_lst(a);
 	arr = ps_find_lis(temp, ft_lstsize(temp));
 	while (i < 3)
 	{
-		ft_printf("%d\n", arr[i]);
+		ft_printf("*%d\n", arr[i]);
 		i++;
 	}
 	ps_print_list(a, temp);

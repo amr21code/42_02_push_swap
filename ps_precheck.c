@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:55:17 by anruland          #+#    #+#             */
-/*   Updated: 2022/03/31 20:05:53 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/03 19:49:33 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	ps_error_check(int ac, char **av)
 	int		j;
 	long	atol;
 
-	i = 1;
+	i = 2;
 	while (i < ac)
 	{
-		j = i - 1;
+		j = 1;
 		atol = ft_atol(av[i]);
-		while (j >= 0)
+		while (j < i)
 		{
 			if (atol > INT_MAX || atol < INT_MIN
 				|| ft_isdigit_str(av[i]) || ft_atol(av[j]) == atol)
@@ -47,7 +47,7 @@ int	ps_error_check(int ac, char **av)
 				ft_putstr_fd("Error\n", 2);
 				return (1);
 			}
-			j--;
+			j++;
 		}
 		i++;
 	}
