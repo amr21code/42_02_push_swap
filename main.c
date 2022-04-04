@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:04:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/04 19:56:46 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/04 20:11:27 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,14 @@ int	ps_check_non_lis(int *arr, int nb)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	while (i < arr[0])
 	{
 		if (nb == arr[i])
+		{
+			// ft_printf("arr[%d] = %d\n", i, arr[i]);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -162,13 +165,15 @@ int	ps_check_non_lis(int *arr, int nb)
 
 void	ps_rm_non_lis(int *arr, t_list *a, t_list **b)
 {
-	while (ft_lstsize(a) != (arr[0] - 1))
+	while (ft_lstsize(a) > (arr[0] - 1))
 	{
 		if (!ps_check_non_lis(arr, *((int *)a->content)))
 			ps_push(&a, b, 'a');
 		else
-			ps_rotate(&a, 'a');
+			ps_rotate(&a, 'a');   //// ROTATE SCHEINT EINEN FEHLER ZU HABEN BEI DER LETZTEN NUMMER
+		ps_print_list(a, *b);
 	}
+		// ft_printf("%d, arr %d, a %d\n", ft_lstsize(a), (arr[0] - 1), *((int *)a->content));
 }
 
 int	main(int ac, char **av)
@@ -199,13 +204,13 @@ int	main(int ac, char **av)
 	free(temp);
 	temp = ps_duplicate_lst(a);
 	arr = ps_find_lis(temp, ft_lstsize(temp));
-	// int i;
-	// i = 0;
-	// while (i < arr[0])
-	// {
-	// 	ft_printf("arr[%d] = %d\n", i, arr[i]);
-	// 	i++;
-	// }
+	int i;
+	i = 0;
+	while (i < arr[0])
+	{
+		ft_printf("arr[%d] = %d\n", i, arr[i]);
+		i++;
+	}
 	ps_rm_non_lis(arr, a, &b);
 	ps_print_list(a, b);
 	return (0);
