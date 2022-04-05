@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:24:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/03/28 15:45:35 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/05 17:11:09 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ps_rotate(t_list **head, char list)
 	if (ft_lstsize(*head) > 1)
 	{
 		temp = *head;
-		ft_lstadd_back(&(*head), *head);
+		ft_lstadd_back(&(*head), temp);
 		*head = temp->next;
 		temp->next = NULL;
 		if (list == 'a')
