@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:05:12 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/05 20:07:26 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:27:14 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,17 @@ int		ps_find_lowest(t_list *lst);
 int		ps_check_non_lis(int *arr, int nb);
 t_list	*ps_rm_non_lis(int *arr, t_list *a, t_list **b);
 
+/* ps_cheapest.c */
+int		ps_iterate_a(int *arr, int nb);
+int		ps_calc_b(int *arr, int idx);
+int		ps_calc_best(int *sol, int *tmp);
+int		*ps_find_cheapest_move(int *a, int *b);
+
 /* ps_helper1.c */
 void	ps_init_arrays(int **list, int **length, int **sequence, t_list *a);
 t_list	*ps_duplicate_lst(t_list *lst);
+void	ps_init_arr_bestelem(int **acpy, int **bcpy, t_list *a, t_list *b);
+int		ps_find_max(int *arr);
+int		ps_abs(int nb);
 
 #endif
