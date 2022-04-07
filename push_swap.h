@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:05:12 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/06 19:27:14 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:54:18 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ t_list	*ps_duplicate_lst(t_list *lst);
 void	ps_init_arr_bestelem(int **acpy, int **bcpy, t_list *a, t_list *b);
 int		ps_find_max(int *arr);
 int		ps_abs(int nb);
+
+
+int		*ps_calc_rotation(int *solution);
 
 #endif

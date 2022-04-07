@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:25:59 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/06 19:26:07 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:32:15 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,25 @@ int	ps_iterate_a(int *arr, int nb)
 
 	max = ps_find_max(arr);
 	size = arr[0];
-	i = 1;
+	i = 2;
 	if (nb > arr[max])
 		return (max);
 	while (i <= size)
 	{
-		if (nb < arr[i])
+		// ft_printf("nb = %d, arr[1] = %d, arr[size] = %d, arr[i] = %d\n", nb, arr[1], arr[size], arr[i]);
+		if (nb < arr[1] && nb > arr[size])
+		{
+			i = 1;
+			break ;
+		}
+		else if (nb < arr[i] && nb > arr[i - 1])
 			break ;
 		i++;
 	}
+	// printf("i = %d, size = %d\n", i, size);
 	i--;
 	if ((size / 2) < (i))
-	{
 		i = (i - size);
-	}
-
 	return (i);
 }
 
@@ -52,7 +56,22 @@ int	ps_calc_b(int *arr, int idx)
 
 int	ps_calc_best(int *sol, int *tmp)
 {
-	if ((ps_abs(sol[1]) + ps_abs(sol[2])) > (ps_abs(tmp[1]) + ps_abs(tmp[2])))
+	int	*sol_steps;
+	int	*tmp_steps;
+	int	i;
+	int	ssteps;
+	int	tsteps;
+
+	i = 0;
+	sol_steps = ps_calc_rotation(sol);
+	tmp_steps = ps_calc_rotation(tmp);
+	while (i < 3)
+	{
+		ssteps += ps_abs(sol_steps[i]);
+		tsteps += ps_abs(tmp_steps[i]);
+		i++;
+	}
+	if (ssteps > tsteps)
 		return (1);
 	return (0);
 }
@@ -70,6 +89,7 @@ int	*ps_find_cheapest_move(int *a, int *b)
 		tmp[0] = b[i];
 		tmp[1] = ps_iterate_a(a, b[i]);
 		tmp[2] = ps_calc_b(b, i);
+		// ft_printf("solution 0 = %d, 1 = %d, 2 = %d\n", tmp[0], tmp[1], tmp[2]);
 		if (ps_calc_best(solution, tmp) || i == 1)
 		{
 			solution[0] = tmp[0];
