@@ -6,13 +6,13 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:00:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/05 20:06:43 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/09 18:16:49 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*ps_get_sequence(int *list, int *sequence, int *length, int len)
+int	*ps_get_sequence(int **list, int **sequence, int **length, int len)
 {
 	int	i;
 	int	max;
@@ -24,20 +24,29 @@ int	*ps_get_sequence(int *list, int *sequence, int *length, int len)
 	max = INT_MIN;
 	while (i < len)
 	{
-		if (length[i] > max)
+		// ft_printf("length[%d] = %d, max %d, max_idx %d\n", i, (*length)[i], max, idx_max);
+		if ((*length)[i] > max)
 		{
-			max = length[i];
+			max = (*length)[i];
 			idx_max = i;
 		}
 		i++;
 	}
-	res = (int *)malloc(sizeof(int) * (idx_max + 1));
+	res = (int *)malloc(sizeof(int) * (max + 1));
 	res[0] = ++max;
 	while (--max > 0)
 	{
-		res[max] = list[idx_max];
-		idx_max = sequence[idx_max];
+		res[max] = (*list)[idx_max];
+		idx_max = (*sequence)[idx_max];
+		// ft_printf("res[%d] = %d, idx_max %d")
 	}
+	// ft_printf("%d\n", res[0]);
+	// ft_printf("%d\n", res[1]);
+	// ft_printf("%d\n", res[2]);
+	// ft_printf("%d\n", res[3]);
+	free(*list);
+	free(*sequence);
+	free(*length);
 	return (res);
 }
 
@@ -62,13 +71,14 @@ int	*ps_find_lis(t_list *a, int len)
 				{
 					length[i] = length[j] + 1;
 					sequence[i] = j;
+					// ft_printf("j = %d, length[%d] = %d, sequence = %d, list = %d \n", j, i, length[i], sequence[i], list[i]);
 				}
 			}
 			j++;
 		}
 		i++;
 	}
-	return (ps_get_sequence(list, sequence, length, len));
+	return (ps_get_sequence(&list, &sequence, &length, len));
 }
 
 int	ps_find_lowest(t_list *lst)
@@ -85,11 +95,12 @@ int	ps_find_lowest(t_list *lst)
 	i = 0;
 	while (lst)
 	{
-		if (low > *((int *)lst->content))
+		if (low > *(int *)lst->content)
 		{
-			low = *((int *)lst->content);
+			low = *(int *)lst->content;
 			low_idx = i;
 		}
+		// ft_printf("low[%d] %d cont %d\n", low_idx, low, *(int *)lst->content);
 		lst = lst->next;
 		i++;
 	}

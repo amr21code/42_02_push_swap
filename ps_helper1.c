@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:04:58 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/06 19:25:16 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/09 17:51:51 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	ps_init_arrays(int **list, int **length, int **sequence, t_list *a)
 	*sequence = malloc(sizeof(int) * len);
 	while (a)
 	{
-		(*list)[i] = *((int *)a->content);
+		// ft_printf("c = %d\n", *(int *)a->content);
+		(*list)[i] = *(int *)a->content;
 		(*length)[i] = 1;
 		(*sequence)[i] = 0;
+		// ft_printf("length[%d] = %d, sequence = %d, list = %d c = %d\n", i, (*length)[i], (*sequence)[i], (*list)[i], *(int *)a->content);
 		a = a->next;
 		i++;
 	}

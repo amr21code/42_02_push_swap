@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:04:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/07 19:32:58 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/09 19:27:04 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,24 @@ void	ps_smart_rotate(int *solution, t_list **a, t_list **b)
 	free(rotation);
 }
 
+void	ps_del(void *lst)
+{
+	free(lst);
+}
+
+void	ft_lstclear_ptr(t_list **lst)
+{
+	t_list	*temp;
+
+	while (*lst)
+	{
+		temp = *lst;
+		*lst = temp->next;
+		free(temp);
+	}
+	*lst = NULL;
+}
+
 void	ps_rotate_lowest(t_list **a)
 {
 	int		lowest;
@@ -102,6 +120,7 @@ void	ps_rotate_lowest(t_list **a)
 
 	temp = ps_duplicate_lst(*a);
 	lowest = ps_find_lowest(temp);
+	// ft_printf("lowest %d", lowest);
 	if (lowest > 0)
 	{
 		while (lowest--)
@@ -112,7 +131,9 @@ void	ps_rotate_lowest(t_list **a)
 		while (lowest++)
 			ps_rotate_reverse(a, 'a');
 	}
-	free(temp);
+	// ft_printf("t %p\n", &temp);
+	// ps_print_list(*a, temp);
+	ft_lstclear_ptr(&temp);
 }
 
 void	ps_sort(t_list **a, t_list **b)
@@ -132,6 +153,8 @@ void	ps_sort(t_list **a, t_list **b)
 			ps_push(b, a, 'b');
 			// ps_print_list(*a, *b);
 			free(solution);
+			free(acpy);
+			free(bcpy);
 		}
 		else
 			ps_rotate_lowest(a);
@@ -148,13 +171,29 @@ int	main(int ac, char **av)
 	a = NULL;
 	b = NULL;
 	if (ac < 2 || ps_error_check(ac, av) || !ps_init_list(&a, ac, av))
+	{
+		ft_lstclear(&a, ps_del);
 		return (0);
+	}
+	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
+	// ft_printf("a = %d\n", *(int *)a->content);
+	// ft_printf("a %p\n", a);
 	ps_rotate_lowest(&a);
 	temp = ps_duplicate_lst(a);
 	arr = ps_find_lis(temp, ft_lstsize(temp));
+	// ft_printf("%d\n", arr[0]);
+	// ft_printf("%d\n", arr[1]);
+	// ft_printf("%d\n", arr[2]);
+	// ft_printf("%d\n", arr[3]);
 	a = ps_rm_non_lis(arr, a, &b);
-	// ps_print_list(a, b);
 	ps_sort(&a, &b);
 	// ps_print_list(a, b);
+	ft_lstclear(&a, ps_del);
+	ft_lstclear(&b, ps_del);
+	ft_lstclear_ptr(&temp);
+	free(arr);
 	return (0);
 }
+
+	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
+	// ft_printf("a = %d\n", *(int *)a->content);

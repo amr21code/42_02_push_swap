@@ -6,7 +6,7 @@
 #    By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 11:00:24 by anruland          #+#    #+#              #
-#    Updated: 2022/04/03 20:03:10 by anruland         ###   ########.fr        #
+#    Updated: 2022/04/09 10:13:24 by anruland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME 	= push_swap
 CC 		= gcc
-CFLAGS	= -Werror -Wall -Wextra
+CFLAGS	= -Werror -Wall -Wextra -g
 LIBS	= -lft -lftprintf
 LIB_DIR	= -L.
 

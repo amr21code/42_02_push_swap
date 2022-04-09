@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:25:59 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/07 19:32:15 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/09 12:37:59 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	ps_calc_best(int *sol, int *tmp)
 	int	tsteps;
 
 	i = 0;
+	ssteps = 0;
+	tsteps = 0;
 	sol_steps = ps_calc_rotation(sol);
 	tmp_steps = ps_calc_rotation(tmp);
 	while (i < 3)
@@ -71,6 +73,8 @@ int	ps_calc_best(int *sol, int *tmp)
 		tsteps += ps_abs(tmp_steps[i]);
 		i++;
 	}
+	free(sol_steps);
+	free(tmp_steps);
 	if (ssteps > tsteps)
 		return (1);
 	return (0);
@@ -84,6 +88,9 @@ int	*ps_find_cheapest_move(int *a, int *b)
 
 	i = 1;
 	solution = (int *)malloc(sizeof(int) * 3);
+	solution[0] = INT_MAX;
+	solution[1] = INT_MAX;
+	solution[2] = INT_MAX;
 	while (i <= b[0])
 	{
 		tmp[0] = b[i];

@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:57:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/03/31 20:34:08 by anruland         ###   ########.fr       */
+/*   Updated: 2022/04/09 18:10:00 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ps_init_list(t_list **a, int ac, char **av)
 		ft_lstadd_back(a, new);
 		i++;
 	}
+	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
+	// ft_printf("a = %d\n", *(int *)new->content);
 	if (ps_check_sort(*a, 'a'))
 		return (0);
 	return (1);
