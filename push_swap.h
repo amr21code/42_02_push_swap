@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:05:12 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/09 14:53:32 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:28:42 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
-# include "libftprintf/ft_printf.h"
 # include <unistd.h>
 # include <stdlib.h>
 # define INT_MAX   2147483647 
 # define INT_MIN   -2147483648
-
-/* ft_atol.c */
-long	ft_atol(const char *str);
 
 /* ps_s.c */
 void	ps_swap(t_list **head, char list);
@@ -68,7 +64,6 @@ t_list	*ps_duplicate_lst(t_list *lst);
 void	ps_init_arr_bestelem(int **acpy, int **bcpy, t_list *a, t_list *b);
 int		ps_find_max(int *arr);
 int		ps_abs(int nb);
-
 
 int		*ps_calc_rotation(int *solution);
 

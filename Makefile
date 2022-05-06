@@ -6,7 +6,7 @@
 #    By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 11:00:24 by anruland          #+#    #+#              #
-#    Updated: 2022/04/09 10:13:24 by anruland         ###   ########.fr        #
+#    Updated: 2022/05/06 20:30:49 by anruland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@
 NAME 	= push_swap
 CC 		= gcc
 CFLAGS	= -Werror -Wall -Wextra -g
-LIBS	= -lft -lftprintf
-LIB_DIR	= -L.
+LIBS	= -lft
+LIB_DIR	= -L./libft/
 
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
@@ -38,18 +38,16 @@ $(NAME): setup
 
 setup:
 	@echo "$(COM_COLOR)Compiling libft$(NO_COLOR)"
-	@cd ./libft/ && make -s re
-	@cp ./libft/libft.a ./
-	@echo "$(COM_COLOR)Compiling ft_printf$(NO_COLOR)"
-	@cd ./libftprintf/ && make -s re
-	@cp ./libftprintf/libftprintf.a ./
+	@$(MAKE) -C ./libft
+	@echo "$(OK_COLOR)done$(NO_COLOR)"
 
 clean:
-# @echo "$(COM_COLOR)Cleaning Object Files$(NO_COLOR)"
-# @/bin/rm -f
+	@echo "$(COM_COLOR)Cleaning Object Files$(NO_COLOR)"
+	@$(MAKE) -C ./libft clean
 
 fclean: clean
 	@echo "$(COM_COLOR)Cleaning $(NAME)$(NO_COLOR)"
 	@/bin/rm -f $(NAME)
+	@$(MAKE) -C ./libft fclean
 
 re: fclean all
