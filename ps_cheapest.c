@@ -6,12 +6,11 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:25:59 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/09 12:37:59 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/07 06:29:04 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	ps_iterate_a(int *arr, int nb)
 {

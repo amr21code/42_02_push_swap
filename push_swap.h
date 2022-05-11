@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:05:12 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/06 20:28:42 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/07 06:51:22 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <stdlib.h>
 # define INT_MAX   2147483647 
 # define INT_MIN   -2147483648
+
+typedef struct	s_lis
+{
+	int	*list;
+	int	*length;
+	int	*sequence;
+};	t_lis
 
 /* ps_s.c */
 void	ps_swap(t_list **head, char list);
@@ -66,5 +73,12 @@ int		ps_find_max(int *arr);
 int		ps_abs(int nb);
 
 int		*ps_calc_rotation(int *solution);
+
+/* ps_helper2.c */
+void	ps_del(void *lst);
+void	ft_lstclear_ptr(t_list **lst);
+int		ps_smallest(int *arr);
+int		ps_rest_a(int *arr);
+int		ps_rest_b(int *arr);
 
 #endif

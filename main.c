@@ -6,38 +6,49 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:04:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/09 19:27:04 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/07 06:49:11 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ps_smallest(int *arr)
-{
-	if (arr[1] < arr[2])
-		return (arr[1]);
-	else
-		return (arr[2]);
-}
+void	ps_rotate_lowest(t_list **a);
+void	ps_smart_rotate(int *solution, t_list **a, t_list **b);
+int		*ps_calc_rotation(int *solution);
+void	ps_sort(t_list **a, t_list **b);
 
-int	ps_rest_a(int *arr)
+int	main(int ac, char **av)
 {
-	if (arr[1] == 0 || arr[2] == 0)
-		return (arr[1]);
-	else if (arr[1] <= arr[2])
-		return (0);
-	else
-		return (arr[1] - arr[2]);
-}
+	t_list	*a;
+	t_list	*b;
+	// t_list	*temp;
+	int		*arr;
 
-int	ps_rest_b(int *arr)
-{
-	if (arr[1] == 0 || arr[2] == 0)
-		return (arr[2]);
-	else if (arr[1] >= arr[2])
+	a = NULL;
+	b = NULL;
+	if (ac < 2 || ps_error_check(ac, av) || !ps_init_list(&a, ac, av))
+	{
+		ft_lstclear(&a, ps_del);
 		return (0);
-	else
-		return (arr[2] - arr[1]);
+	}
+	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
+	// ft_printf("a = %d\n", *(int *)a->content);
+	// ft_printf("a %p\n", a);
+	// ps_rotate_lowest(&a);
+	// temp = ps_duplicate_lst(a);
+	arr = ps_find_lis(a, ft_lstsize(a));
+	// ft_printf("%d\n", arr[0]);
+	// ft_printf("%d\n", arr[1]);
+	// ft_printf("%d\n", arr[2]);
+	// ft_printf("%d\n", arr[3]);
+	a = ps_rm_non_lis(arr, a, &b);
+	ps_sort(&a, &b);
+	// ps_print_list(a, b);
+	ft_lstclear(&a, ps_del);
+	ft_lstclear(&b, ps_del);
+	// ft_lstclear_ptr(&temp);
+	free(arr);
+	return (0);
 }
 
 int	*ps_calc_rotation(int *solution)
@@ -95,24 +106,6 @@ void	ps_smart_rotate(int *solution, t_list **a, t_list **b)
 	free(rotation);
 }
 
-void	ps_del(void *lst)
-{
-	free(lst);
-}
-
-void	ft_lstclear_ptr(t_list **lst)
-{
-	t_list	*temp;
-
-	while (*lst)
-	{
-		temp = *lst;
-		*lst = temp->next;
-		free(temp);
-	}
-	*lst = NULL;
-}
-
 void	ps_rotate_lowest(t_list **a)
 {
 	int		lowest;
@@ -159,40 +152,6 @@ void	ps_sort(t_list **a, t_list **b)
 		else
 			ps_rotate_lowest(a);
 	}
-}
-
-int	main(int ac, char **av)
-{
-	t_list	*a;
-	t_list	*b;
-	t_list	*temp;
-	int		*arr;
-
-	a = NULL;
-	b = NULL;
-	if (ac < 2 || ps_error_check(ac, av) || !ps_init_list(&a, ac, av))
-	{
-		ft_lstclear(&a, ps_del);
-		return (0);
-	}
-	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
-	// ft_printf("a = %d\n", *(int *)a->content);
-	// ft_printf("a %p\n", a);
-	ps_rotate_lowest(&a);
-	temp = ps_duplicate_lst(a);
-	arr = ps_find_lis(temp, ft_lstsize(temp));
-	// ft_printf("%d\n", arr[0]);
-	// ft_printf("%d\n", arr[1]);
-	// ft_printf("%d\n", arr[2]);
-	// ft_printf("%d\n", arr[3]);
-	a = ps_rm_non_lis(arr, a, &b);
-	ps_sort(&a, &b);
-	// ps_print_list(a, b);
-	ft_lstclear(&a, ps_del);
-	ft_lstclear(&b, ps_del);
-	ft_lstclear_ptr(&temp);
-	free(arr);
-	return (0);
 }
 
 	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
