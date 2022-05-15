@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:04:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 15:16:14 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:46:56 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ int	main(int ac, char **av)
 		ps_sort_small(&a, &b);
 	else
 	{
-		// ps_print_list(a, b);
 		arr = ps_find_lis(a);
 		a = ps_rm_non_lis(arr, a, &b);
-		// ps_print_list(a, b);
 		ps_sort(&a, &b);
 	}
-	// ps_print_list(a, b);
 	ps_destroy(&a, &b, arr);
 	return (0);
 }
@@ -73,8 +70,8 @@ int	*ps_calc_rotation(int *solution)
 }
 
 /**
- * Rotates
- * 
+ * Rotates both stacks to the right position of the
+ * cheapest element and its postion in a
  * @param solution [int *] the cheapest move
  * @param a [t_list **] Stack a
  * @param b [t_list **] Stack b
@@ -87,28 +84,14 @@ void	ps_smart_rotate(int *solution, t_list **a, t_list **b)
 	int	rotas;
 
 	j = 0;
-	// ft_printf("solution nb = %d, a = %d, b = %d\n", solution[0], solution[1], solution[2]);
 	rotation = ps_calc_rotation(solution);
-	// ft_printf("solution nb = %d, a = %d, b = %d\n", solution[0], solution[1], solution[2]);
-	// ft_printf("rotation both = %d, a = %d, b = %d\n", rotation[0], rotation[1], rotation[2]);
 	while (j < 3)
 	{
 		i = 0;
 		rotas = ps_abs(rotation[j]);
 		while (i < rotas)
 		{
-			if (j == 0 && rotation[j] < 0)
-				ps_rrr(a, b);
-			else if (j == 0)
-				ps_rr(a, b);
-			else if (j == 1 && rotation[j] < 0)
-				ps_rotate_reverse(a, 'a', 0);
-			else if (j == 1)
-				ps_rotate(a, 'a', 0);
-			else if (j == 2 && rotation[j] < 0)
-				ps_rotate_reverse(b, 'b', 0);
-			else if (j == 2)
-				ps_rotate(b, 'b', 0);
+			ps_exec_smart_rotations(a, b, rotation, j);
 			i++;
 		}
 		j++;
@@ -116,6 +99,11 @@ void	ps_smart_rotate(int *solution, t_list **a, t_list **b)
 	free(rotation);
 }
 
+/**
+ * Finds the lowest number and rotates depending
+ * on its position in the stack.
+ * @param a [t_list **] Stack a
+  */
 void	ps_rotate_lowest(t_list **a)
 {
 	int		lowest;
@@ -123,7 +111,6 @@ void	ps_rotate_lowest(t_list **a)
 
 	temp = ps_duplicate_lst(*a);
 	lowest = ps_find_lowest(temp);
-	// ft_printf("lowest %d", lowest);
 	if (lowest > 0)
 	{
 		while (lowest--)
@@ -134,8 +121,6 @@ void	ps_rotate_lowest(t_list **a)
 		while (lowest++)
 			ps_rotate_reverse(a, 'a', 0);
 	}
-	// ft_printf("t %p\n", &temp);
-	// ps_print_list(*a, temp);
 	ft_lstclear_ptr(&temp);
 }
 
@@ -154,14 +139,12 @@ void	ps_sort(t_list **a, t_list **b)
 
 	while (!ps_check_sort(*a, 'a') || ft_lstsize(*b) != 0)
 	{
-		// ps_print_list(*a, *b);
 		if (ft_lstsize(*b) != 0)
 		{
 			ps_init_arr_bestelem(&acpy, &bcpy, *a, *b);
 			solution = ps_find_cheapest_move(acpy, bcpy);
 			ps_smart_rotate(solution, a, b);
 			ps_push(b, a, 'b');
-			// ps_print_list(*a, *b);
 			free(solution);
 			free(acpy);
 			free(bcpy);
@@ -170,11 +153,3 @@ void	ps_sort(t_list **a, t_list **b)
 			ps_rotate_lowest(a);
 	}
 }
-
-	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
-	// ft_printf("a = %d\n", *(int *)a->content);
-	// ft_printf("a2 = %d\n", *((int *)(*a)->content));
-	// ft_printf("a = %d\n", *(int *)a->content);
-	// ft_printf("a %p\n", a);
-	// ps_rotate_lowest(&a);
-	// temp = ps_duplicate_lst(a);

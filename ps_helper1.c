@@ -6,12 +6,22 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:04:58 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 12:55:52 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:48:05 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/**
+ * Finds the index with the maximum number in the given array
+ * and returns the maximum index.
+ * @param lis [t_liseq] Struct containing arrays with the following contents
+ * @param lis.list [int *] - copy of stack a
+ * @param lis.length [int *] - the length of the sequence to that point
+ * @param lis.sequence [int *] - the index of the previous element in 
+ * 								the sequence
+ * @param lis.len [int] - the length of all arrays
+ */
 int	ps_find_lowest_idx(t_liseq lis)
 {
 	int	i;
@@ -33,6 +43,15 @@ int	ps_find_lowest_idx(t_liseq lis)
 	return (j);
 }
 
+/**
+ * Rotates the lis.list array to have the lowest element at index 0
+ * @param lis [t_liseq] Struct containing arrays with the following contents
+ * @param lis.list [int *] - copy of stack a
+ * @param lis.length [int *] - the length of the sequence to that point
+ * @param lis.sequence [int *] - the index of the previous element in 
+ * 								the sequence
+ * @param lis.len [int] - the length of all arrays
+ */
 void	ps_rotate_arr_list(t_liseq *lis)
 {
 	int	i;
@@ -41,7 +60,6 @@ void	ps_rotate_arr_list(t_liseq *lis)
 
 	tmp = 0;
 	i = ps_find_lowest_idx(*lis);
-	// ft_printf("i %d\n", i);
 	while (i)
 	{
 		j = 0;
@@ -53,7 +71,6 @@ void	ps_rotate_arr_list(t_liseq *lis)
 			else
 				(*lis).list[j] = (*lis).list[j + 1];
 			j++;
-			// ft_printf("i = %d, list[0] = %d list[1] = %d list[2] = %d list[3] = %d\n", i, (*lis).list[0], (*lis).list[1], (*lis).list[2], (*lis).list[3]);
 		}
 		i--;
 	}

@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:25:59 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 14:34:44 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:47:33 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ps_iterate_a(int *arr, int nb)
 		return (max);
 	while (i <= size)
 	{
-		// ft_printf("nb = %d, arr[1] = %d, arr[size] = %d, arr[i] = %d\n", nb, arr[1], arr[size], arr[i]);
 		if (nb < arr[1] && nb > arr[size])
 		{
 			i = 1;
@@ -41,7 +40,6 @@ int	ps_iterate_a(int *arr, int nb)
 			break ;
 		i++;
 	}
-	// printf("i = %d, size = %d\n", i, size);
 	i--;
 	if ((size / 2) < (i))
 		i = (i - size);
@@ -126,7 +124,6 @@ int	*ps_find_cheapest_move(int *a, int *b)
 		tmp[0] = b[i];
 		tmp[1] = ps_iterate_a(a, b[i]);
 		tmp[2] = ps_calc_b(b, i);
-		// ft_printf("solution 0 = %d, a = %d, b = %d\n", tmp[0], tmp[1], tmp[2]);
 		if (ps_calc_best(solution, tmp) || i == 1)
 		{
 			solution[0] = tmp[0];

@@ -6,25 +6,31 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:00:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 14:55:44 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:07:13 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*ps_get_sequence(t_liseq lis)
+/**
+ * Uses the LIS struct to get the LIS and returns it
+ * @param lis [t_liseq] Struct containing arrays with the following contents
+ * @param lis.list [int *] - copy of stack a
+ * @param lis.length [int *] - the length of the sequence to that point
+ * @param lis.sequence [int *] - the index of the previous element in 
+ * 								the sequence
+ * @param lis.len [int] - the length of all arrays
+ */
+int	*ps_get_sequence(t_liseq lis, int i)
 {
-	int	i;
 	int	max;
 	int	idx_max;
 	int	*res;
 
-	i = 0;
 	idx_max = 0;
 	max = INT_MIN;
 	while (i < lis.len)
 	{
-		// ft_printf("length[%d] = %d, max %d, max_idx %d\n", i, (*length)[i], max, idx_max);
 		if (lis.length[i] > max)
 		{
 			max = lis.length[i];
@@ -38,18 +44,16 @@ int	*ps_get_sequence(t_liseq lis)
 	{
 		res[max] = lis.list[idx_max];
 		idx_max = lis.sequence[idx_max];
-		// ft_printf("res[%d] = %d, idx_max %d")
 	}
-	// ft_printf("%d\n", res[0]);
-	// ft_printf("%d\n", res[1]);
-	// ft_printf("%d\n", res[2]);
-	// ft_printf("%d\n", res[3]);
-	free(lis.list);
-	free(lis.sequence);
-	free(lis.length);
+	ps_freelis(&lis);
 	return (res);
 }
 
+/**
+ * Main function to find the Largest Increasing Sequence (LIS)
+ * Returns the array of the LIS
+ * @param a [t_list] - Stack a
+ */
 int	*ps_find_lis(t_list *a)
 {
 	int		i;
@@ -59,7 +63,6 @@ int	*ps_find_lis(t_list *a)
 	i = 1;
 	ps_init_arrays(&lis, a);
 	ps_rotate_arr_list(&lis);
-	// ft_printf("j = , length[%d] = %d, sequence = %d, list = %d \n", i, lis.length[i], lis.sequence[i], lis.list[i]);
 	while (i < lis.len)
 	{
 		j = 0;
@@ -77,9 +80,14 @@ int	*ps_find_lis(t_list *a)
 		}
 		i++;
 	}
-	return (ps_get_sequence(lis));
+	return (ps_get_sequence(lis, 0));
 }
 
+/**
+ * Finds the lowest index
+ * 
+ * @param a [t_list] - Stack a
+ */
 int	ps_find_lowest(t_list *lst)
 {
 	int		low;
@@ -99,7 +107,6 @@ int	ps_find_lowest(t_list *lst)
 			low = *(int *)lst->content;
 			low_idx = i;
 		}
-		// ft_printf("low[%d] %d cont %d\n", low_idx, low, *(int *)lst->content);
 		lst = lst->next;
 		i++;
 	}
@@ -109,6 +116,11 @@ int	ps_find_lowest(t_list *lst)
 		return (low_idx);
 }
 
+/**
+ * Check for LIS or not inside array
+ * @param arr [int *] - Array with all non LIS elements
+ * @param nb [int] - number to check
+ */
 int	ps_check_non_lis(int *arr, int nb)
 {
 	int		i;
@@ -125,6 +137,12 @@ int	ps_check_non_lis(int *arr, int nb)
 	return (0);
 }
 
+/**
+ * Rotates and pushes all non LIS elements to b
+ * @param arr [int *] - Array with all non LIS elements
+ * @param a [t_list **] - Stack a
+ * @param b [t_list **] - Stack a
+ */
 t_list	*ps_rm_non_lis(int *arr, t_list *a, t_list **b)
 {
 	while (ft_lstsize(a) > (arr[0] - 1))

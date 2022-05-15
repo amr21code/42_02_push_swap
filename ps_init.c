@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:57:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 12:53:41 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:52:21 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ void	ps_update_idx(t_list *a)
 	}
 }
 
+/**
+ * Initializes the arrays on the LIS struct
+ * @param lis [t_liseq] Struct containing arrays with the following contents
+ * @param lis.list [int *] - copy of stack a
+ * @param lis.length [int *] - the length of the sequence to that point
+ * @param lis.sequence [int *] - the index of the previous element in 
+ * 								the sequence
+ * @param lis.len [int] - the length of all arrays
+ */
 void	ps_init_arrays(t_liseq *lis, t_list *a)
 {
 	int	i;
@@ -88,11 +97,9 @@ void	ps_init_arrays(t_liseq *lis, t_list *a)
 	(*lis).sequence = malloc(sizeof(int) * (*lis).len);
 	while (a)
 	{
-		// ft_printf("c = %d\n", a->idx);
 		((*lis).list)[i] = *(int *)a->content;
 		((*lis).length)[i] = 1;
 		((*lis).sequence)[i] = 0;
-		// ft_printf("length[%d] = %d, sequence = %d, list = %d c = %d\n", i, (*length)[i], (*sequence)[i], (*list)[i], *(int *)a->content);
 		a = a->next;
 		i++;
 	}

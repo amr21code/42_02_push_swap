@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:37:17 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 10:47:50 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:11:39 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	ps_swap(t_list **head, char list, int ss)
 	}
 }
 
+/**
+ * Swaps the first two elements of both lists
+ * @param a [t_list **] List a
+ * @param b [t_list **] List b
+ */
 void	ps_ss(t_list **a, t_list **b)
 {
 	ps_swap(a, ' ', 1);

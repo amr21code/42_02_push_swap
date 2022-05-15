@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:05:12 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 14:47:27 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:07:07 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		ft_isdigit_str(char *str);
 int		ps_error_check(int ac, char **av);
 
 /* ps_lis.c */
-int		*ps_get_sequence(t_liseq lis);
+int		*ps_get_sequence(t_liseq lis, int i);
 int		*ps_find_lis(t_list *a);
 int		ps_find_lowest(t_list *lst);
 int		ps_check_non_lis(int *arr, int nb);
@@ -91,5 +91,7 @@ void	ps_sort_lt5(t_list **a, t_list **b);
 
 /* ps_helper3.c */
 void	ps_destroy(t_list **a, t_list **b, int *arr);
+void	ps_exec_smart_rotations(t_list **a, t_list **b, int *rotation, int j);
+void	ps_freelis(t_liseq *lis);
 
 #endif
