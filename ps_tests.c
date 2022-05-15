@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:56:19 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/05 19:42:05 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 10:36:53 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	ps_print_list(t_list *a, t_list *b)
 	{
 		if (a)
 		{
-			ft_printf("%d\t\t\t", *((int *)a->content));
+			ft_printf("%d (%d)\t\t\t", *((int *)a->content), a->idx);
 			a = a->next;
 		}
 		else
-			ft_printf(" \t\t\t");
+			ft_printf("     \t\t\t");
 		if (b)
 		{
-			ft_printf("%d\n", *((int *)b->content));
+			ft_printf("%d (%d)\n", *((int *)b->content), b->idx);
 			b = b->next;
 		}
 		else
@@ -35,6 +35,11 @@ void	ps_print_list(t_list *a, t_list *b)
 	ft_printf("a\t\t\tb\n\n");
 }
 
+/**
+ * Check if head is sorted.
+ * @param head [t_list *] Pointer to the list
+ * @param sort [char] determines list 'a' or list 'b'
+ */
 int	ps_check_sort(t_list *head, char sort)
 {
 	t_list	*temp;

@@ -6,31 +6,56 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:04:58 by anruland          #+#    #+#             */
-/*   Updated: 2022/04/09 17:51:51 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 12:55:52 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ps_init_arrays(int **list, int **length, int **sequence, t_list *a)
+int	ps_find_lowest_idx(t_liseq lis)
 {
-	int	len;
 	int	i;
+	int	j;
+	int	tmp;
 
 	i = 0;
-	len = ft_lstsize(a);
-	*list = malloc(sizeof(int) * len);
-	*length = malloc(sizeof(int) * len);
-	*sequence = malloc(sizeof(int) * len);
-	while (a)
+	j = 0;
+	tmp = lis.list[i];
+	while (i < lis.len)
 	{
-		// ft_printf("c = %d\n", *(int *)a->content);
-		(*list)[i] = *(int *)a->content;
-		(*length)[i] = 1;
-		(*sequence)[i] = 0;
-		// ft_printf("length[%d] = %d, sequence = %d, list = %d c = %d\n", i, (*length)[i], (*sequence)[i], (*list)[i], *(int *)a->content);
-		a = a->next;
+		if (tmp > lis.list[i])
+		{
+			tmp = lis.list[i];
+			j = i;
+		}
 		i++;
+	}
+	return (j);
+}
+
+void	ps_rotate_arr_list(t_liseq *lis)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	tmp = 0;
+	i = ps_find_lowest_idx(*lis);
+	// ft_printf("i %d\n", i);
+	while (i)
+	{
+		j = 0;
+		tmp = (*lis).list[j];
+		while (j < (*lis).len)
+		{
+			if (j == (*lis).len -1)
+				(*lis).list[j] = tmp;
+			else
+				(*lis).list[j] = (*lis).list[j + 1];
+			j++;
+			// ft_printf("i = %d, list[0] = %d list[1] = %d list[2] = %d list[3] = %d\n", i, (*lis).list[0], (*lis).list[1], (*lis).list[2], (*lis).list[3]);
+		}
+		i--;
 	}
 }
 
@@ -47,33 +72,13 @@ t_list	*ps_duplicate_lst(t_list *lst)
 	return (new);
 }
 
-void	ps_init_arr_bestelem(int **acpy, int **bcpy, t_list *a, t_list *b)
-{
-	int	len;
-	int	i;
-
-	i = 1;
-	len = ft_lstsize(a);
-	*acpy = malloc(sizeof(int) * (len + 1));
-	(*acpy)[0] = len;
-	while (a)
-	{
-		(*acpy)[i] = *((int *)a->content);
-		a = a->next;
-		i++;
-	}
-	i = 1;
-	len = ft_lstsize(b);
-	*bcpy = malloc(sizeof(int) * (len + 1));
-	(*bcpy)[0] = len;
-	while (b)
-	{
-		(*bcpy)[i] = *((int *)b->content);
-		b = b->next;
-		i++;
-	}
-}
-
+/**
+ * Finds the index with the maximum number in the given array
+ * and returns the maximum index.
+ * @param arr [int *] Array to look for maximum
+ * @param b [int *] Array copy of stack b
+ * arr[0] = length of array
+ */
 int	ps_find_max(int *arr)
 {
 	int	i;

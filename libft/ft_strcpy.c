@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_r.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:24:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 09:08:44 by anruland         ###   ########.fr       */
+/*   Created: 2022/01/12 10:39:23 by anruland         #+#    #+#             */
+/*   Updated: 2022/03/22 10:11:52 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ps_rotate(t_list **head, char list, int rr)
+char	*ft_strcpy(char *dest, char *src)
 {
-	t_list	*temp;
+	char	*p;
 
-	if (ft_lstsize(*head) > 1)
+	p = dest;
+	while (*src != 0)
 	{
-		temp = *head;
-		ft_lstadd_back(&(*head), temp);
-		*head = temp->next;
-		temp->next = NULL;
-		if (list == 'a' && !rr)
-			ft_printf("ra\n");
-		else if (list == 'b' && !rr)
-			ft_printf("rb\n");
+		*dest = *src;
+		dest++;
+		src++;
 	}
-}
-
-void	ps_rr(t_list **a, t_list **b)
-{
-	ps_rotate(a, 'a', 1);
-	ps_rotate(b, 'b', 1);
-	ft_printf("rr\n");
+	return (p);
 }

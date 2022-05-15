@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_r.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:24:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 09:08:44 by anruland         ###   ########.fr       */
+/*   Created: 2022/03/23 12:37:17 by anruland          #+#    #+#             */
+/*   Updated: 2022/03/30 16:06:04 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+/* Deletes and frees the given element and every successor of 
+	that element, using the function 'del' and free.
+	Finally, the pointer to the list must be set to NULL */
 
-void	ps_rotate(t_list **head, char list, int rr)
+#include "libft.h"
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*temp;
 
-	if (ft_lstsize(*head) > 1)
+	if (del != NULL)
 	{
-		temp = *head;
-		ft_lstadd_back(&(*head), temp);
-		*head = temp->next;
-		temp->next = NULL;
-		if (list == 'a' && !rr)
-			ft_printf("ra\n");
-		else if (list == 'b' && !rr)
-			ft_printf("rb\n");
+		while (*lst)
+		{
+			del((*lst)->content);
+			temp = *lst;
+			*lst = temp->next;
+			free(temp);
+		}
+		*lst = NULL;
 	}
-}
-
-void	ps_rr(t_list **a, t_list **b)
-{
-	ps_rotate(a, 'a', 1);
-	ps_rotate(b, 'b', 1);
-	ft_printf("rr\n");
 }

@@ -6,12 +6,18 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:25:59 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/07 06:29:04 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:34:44 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/**
+ * Finds the index where the number will be put
+ * max - if the number is bigger than max it has to go after max
+ * @param arr [int *] array to iterate through
+ * @param nb [int] number 
+ */
 int	ps_iterate_a(int *arr, int nb)
 {
 	int	size;
@@ -42,6 +48,13 @@ int	ps_iterate_a(int *arr, int nb)
 	return (i);
 }
 
+/**
+ * Calculates the position of the number on index in b
+ * and returns the index with + to rotate up or - to 
+ * reverse rotate
+ * @param arr [int *] array to iterate through
+ * @param idx [int] index of b
+ */
 int	ps_calc_b(int *arr, int idx)
 {
 	int	size;
@@ -53,6 +66,15 @@ int	ps_calc_b(int *arr, int idx)
 	return (idx);
 }
 
+/**
+ * Compares the current solution with the new one
+ * and calculates which one is the best
+ * 0 - the number from the list
+ * 1 - the amount of steps needed in stack a
+ * 2 - the amount of steps needed in stack b
+ * @param sol [int *] Array for solution
+ * @param tmp [int *] Array for comparision
+ */
 int	ps_calc_best(int *sol, int *tmp)
 {
 	int	*sol_steps;
@@ -79,6 +101,15 @@ int	ps_calc_best(int *sol, int *tmp)
 	return (0);
 }
 
+/**
+ * Find the cheapest move to push back to a
+ * and returns an array with the solution
+ * 0 - the number from the list
+ * 1 - the amount of steps needed in stack a
+ * 2 - the amount of steps needed in stack b
+ * @param a [int *] Array copy of stack a
+ * @param b [int *] Array copy of stack b
+ */
 int	*ps_find_cheapest_move(int *a, int *b)
 {
 	int	i;
@@ -95,7 +126,7 @@ int	*ps_find_cheapest_move(int *a, int *b)
 		tmp[0] = b[i];
 		tmp[1] = ps_iterate_a(a, b[i]);
 		tmp[2] = ps_calc_b(b, i);
-		// ft_printf("solution 0 = %d, 1 = %d, 2 = %d\n", tmp[0], tmp[1], tmp[2]);
+		// ft_printf("solution 0 = %d, a = %d, b = %d\n", tmp[0], tmp[1], tmp[2]);
 		if (ps_calc_best(solution, tmp) || i == 1)
 		{
 			solution[0] = tmp[0];

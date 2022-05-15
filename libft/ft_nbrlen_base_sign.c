@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_r.c                                             :+:      :+:    :+:   */
+/*   ft_nbrlen_base_sign.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:24:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 09:08:44 by anruland         ###   ########.fr       */
+/*   Created: 2022/05/01 13:25:39 by anruland          #+#    #+#             */
+/*   Updated: 2022/05/01 13:26:35 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ps_rotate(t_list **head, char list, int rr)
+size_t	ft_nbrlen_base_sign(long long nbr, int sign, int base)
 {
-	t_list	*temp;
+	size_t	len;
 
-	if (ft_lstsize(*head) > 1)
+	len = 0;
+	if (sign)
 	{
-		temp = *head;
-		ft_lstadd_back(&(*head), temp);
-		*head = temp->next;
-		temp->next = NULL;
-		if (list == 'a' && !rr)
-			ft_printf("ra\n");
-		else if (list == 'b' && !rr)
-			ft_printf("rb\n");
+		if (nbr < 0)
+		{
+			len++;
+			nbr = -nbr;
+		}
 	}
-}
-
-void	ps_rr(t_list **a, t_list **b)
-{
-	ps_rotate(a, 'a', 1);
-	ps_rotate(b, 'b', 1);
-	ft_printf("rr\n");
+	if (nbr == 0)
+		len++;
+	while (nbr > 0)
+	{
+		nbr /= base;
+		len++;
+	}
+	return (len);
 }

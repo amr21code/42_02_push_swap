@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_r.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:24:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 09:08:44 by anruland         ###   ########.fr       */
+/*   Created: 2022/03/23 12:42:20 by anruland          #+#    #+#             */
+/*   Updated: 2022/03/30 16:28:40 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+/* Iterates the list 'lst' and applies the function 'f' to the
+	content of each element. */
 
-void	ps_rotate(t_list **head, char list, int rr)
+#include "libft.h"
+
+void	ft_lstiter(t_list *lst, void (*f)(void*))
 {
 	t_list	*temp;
 
-	if (ft_lstsize(*head) > 1)
+	temp = lst;
+	while (temp)
 	{
-		temp = *head;
-		ft_lstadd_back(&(*head), temp);
-		*head = temp->next;
-		temp->next = NULL;
-		if (list == 'a' && !rr)
-			ft_printf("ra\n");
-		else if (list == 'b' && !rr)
-			ft_printf("rb\n");
+		f(temp->content);
+		temp = temp->next;
 	}
-}
-
-void	ps_rr(t_list **a, t_list **b)
-{
-	ps_rotate(a, 'a', 1);
-	ps_rotate(b, 'b', 1);
-	ft_printf("rr\n");
 }

@@ -6,7 +6,7 @@
 #    By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 11:00:24 by anruland          #+#    #+#              #
-#    Updated: 2022/05/06 20:30:49 by anruland         ###   ########.fr        #
+#    Updated: 2022/05/12 18:46:57 by anruland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME 	= push_swap
 CC 		= gcc
 CFLAGS	= -Werror -Wall -Wextra -g
-LIBS	= -lft
+LIBS	= -lft -ggdb3
 LIB_DIR	= -L./libft/
 
 COM_COLOR   = \033[0;34m

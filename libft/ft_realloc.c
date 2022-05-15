@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_r.c                                             :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:24:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 09:08:44 by anruland         ###   ########.fr       */
+/*   Created: 2022/04/11 18:41:54 by anruland          #+#    #+#             */
+/*   Updated: 2022/05/06 08:41:51 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ps_rotate(t_list **head, char list, int rr)
+void	*ft_realloc(void *addr, size_t size)
 {
-	t_list	*temp;
+	void	*ptr;
+	size_t	i;
 
-	if (ft_lstsize(*head) > 1)
+	if (size == 0)
+		return (NULL);
+	ptr = malloc(size);
+	if (!ptr)
 	{
-		temp = *head;
-		ft_lstadd_back(&(*head), temp);
-		*head = temp->next;
-		temp->next = NULL;
-		if (list == 'a' && !rr)
-			ft_printf("ra\n");
-		else if (list == 'b' && !rr)
-			ft_printf("rb\n");
+		if (size <= 0)
+			free(addr);
+		return (NULL);
 	}
-}
-
-void	ps_rr(t_list **a, t_list **b)
-{
-	ps_rotate(a, 'a', 1);
-	ps_rotate(b, 'b', 1);
-	ft_printf("rr\n");
+	i = 0;
+	while (i < size && *(char *)(addr + i))
+	{
+		*(char *)(ptr + i) = *(char *)(addr + i);
+		i++;
+	}
+	*(char *)(ptr + (size - 1)) = '\0';
+	free(addr);
+	return (ptr);
 }

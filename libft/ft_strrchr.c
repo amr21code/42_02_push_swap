@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_r.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:24:39 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 09:08:44 by anruland         ###   ########.fr       */
+/*   Created: 2022/01/11 08:31:07 by anruland         #+#    #+#             */
+/*   Updated: 2022/03/22 10:12:38 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+/* The strrchr() function returns a pointer to the last occurrence
+       of the character c in the string s. */
 
-void	ps_rotate(t_list **head, char list, int rr)
+#include "libft.h"
+
+char	*ft_strrchr(const char *s, int c)
 {
-	t_list	*temp;
+	char	*ptr;
 
-	if (ft_lstsize(*head) > 1)
+	ptr = NULL;
+	while (*s)
 	{
-		temp = *head;
-		ft_lstadd_back(&(*head), temp);
-		*head = temp->next;
-		temp->next = NULL;
-		if (list == 'a' && !rr)
-			ft_printf("ra\n");
-		else if (list == 'b' && !rr)
-			ft_printf("rb\n");
+		if (*s == (char)c)
+			ptr = (char *)s;
+		s++;
 	}
-}
-
-void	ps_rr(t_list **a, t_list **b)
-{
-	ps_rotate(a, 'a', 1);
-	ps_rotate(b, 'b', 1);
-	ft_printf("rr\n");
+	if (*s == (char)c)
+		ptr = (char *)s;
+	return (ptr);
 }
