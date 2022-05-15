@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:04:29 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 16:46:56 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 18:10:19 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	else if (ac < 7)
+	{
 		ps_sort_small(&a, &b);
+		ps_destroy_small(&a, &b);
+	}
 	else
 	{
 		arr = ps_find_lis(a);
 		a = ps_rm_non_lis(arr, a, &b);
 		ps_sort(&a, &b);
+		ps_destroy_big(&a, &b, arr);
 	}
-	ps_destroy(&a, &b, arr);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:05:12 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 17:07:07 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 18:11:43 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	ps_sort_lt3(t_list **a, t_list **b);
 void	ps_sort_lt5(t_list **a, t_list **b);
 
 /* ps_helper3.c */
-void	ps_destroy(t_list **a, t_list **b, int *arr);
+void	ps_destroy_big(t_list **a, t_list **b, int *arr);
+void	ps_destroy_small(t_list **a, t_list **b);
 void	ps_exec_smart_rotations(t_list **a, t_list **b, int *rotation, int j);
 void	ps_freelis(t_liseq *lis);
 

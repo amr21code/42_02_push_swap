@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:47:57 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 17:05:45 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 18:09:48 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param b [t_list **] Stack b
  * @param arr [int *] LIS array
  */
-void	ps_destroy(t_list **a, t_list **b, int *arr)
+void	ps_destroy_big(t_list **a, t_list **b, int *arr)
 {
 	ft_lstclear(a, ps_del);
 	ft_lstclear(b, ps_del);
@@ -27,6 +27,18 @@ void	ps_destroy(t_list **a, t_list **b, int *arr)
 		free(arr);
 		arr = NULL;
 	}
+}
+
+/**
+ * Destroys and frees the lists 
+ * @param a [t_list **] Stack a
+ * @param b [t_list **] Stack b
+ * @param arr [int *] LIS array
+ */
+void	ps_destroy_small(t_list **a, t_list **b)
+{
+	ft_lstclear(a, ps_del);
+	ft_lstclear(b, ps_del);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:55:17 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 11:05:47 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/15 18:18:10 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@ int	ft_isdigit_str(char *str)
 
 	j = 0;
 	if (str[0] == '-' || str[0] == '+')
-		j++;
+	{
+		if (strlen(str) > 1)
+			j++;
+	}
 	while (str[j])
 	{
 		if (!ft_isdigit(str[j]))
 			return (0);
 		j++;
 	}
-	return (1);
+	if (j > 0)
+		return (1);
+	else
+		return (0);
 }
 
 /**
