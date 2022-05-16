@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_smallstacks.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruland <anruland@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: anruland <anruland@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 10:48:02 by anruland          #+#    #+#             */
-/*   Updated: 2022/05/15 19:54:54 by anruland         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:59:25 by anruland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ps_sort_lt3(t_list **a, t_list **b)
 		if (!ps_check_sort(*a, 'a'))
 			ps_swap(a, 'a', 0);
 	}
-	else if ((*a)->idx > (*a)->next->idx && (*a)->idx > (*a)->next->next->idx)
+	else if ((*a)->idx > (*a)->next->idx && (*a)->next->next
+		&& (*a)->idx > (*a)->next->next->idx)
 		ps_rotate(a, 'a', 0);
 	else
 	{
